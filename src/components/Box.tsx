@@ -4,6 +4,7 @@ import { Mesh } from "three";
 
 interface BoxProps {
   position?: [number, number, number];
+  color?: string;
 }
 
 function Box(props: BoxProps) {
@@ -24,7 +25,7 @@ function Box(props: BoxProps) {
       scale={hover ? 1.2 : 1}
     >
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={"white"} />
+      <meshStandardMaterial color={props.color} />
     </mesh>
   );
 }
