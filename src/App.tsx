@@ -28,18 +28,21 @@ function App() {
     "white",
     "white",
   ]);
+  const [turn, setTurn] = useState<"player" | "computer">("computer");
+  const [hover, setHover] = useState(false);
 
   useEffect(() => {
-    const sequence = generateSequence(5);
+    const seq = generateSequence(5);
     let i = 0;
 
     function colorNextBox() {
-      if (i === sequence.length) {
+      if (i === seq.length) {
+        setTurn("player");
         return;
       }
 
       const newBoxColors = boxColors.map((color, ci) => {
-        return ci === sequence[i] ? "green" : "white";
+        return ci === seq[i] ? "green" : "white";
       }) as BoxColors;
 
       setBoxColors(newBoxColors);
@@ -55,17 +58,50 @@ function App() {
   }, []);
 
   return (
-    <div id="canvas-container">
+    <div
+      id="canvas-container"
+      style={{ cursor: hover ? "pointer" : "default" }}
+    >
       <Canvas>
         <ambientLight intensity={0.1} />
         <directionalLight color="white" position={[0, 0, 5]} />
 
-        <Box position={[-2, 1, 0]} color={boxColors[0]} />
-        <Box position={[0, 1, 0]} color={boxColors[1]} />
-        <Box position={[2, 1, 0]} color={boxColors[2]} />
-        <Box position={[-2, -1, 0]} color={boxColors[3]} />
-        <Box position={[0, -1, 0]} color={boxColors[4]} />
-        <Box position={[2, -1, 0]} color={boxColors[5]} />
+        <Box
+          position={[-2, 1, 0]}
+          color={boxColors[0]}
+          onHover={() => setHover(true)}
+          onHoverEnd={() => setHover(false)}
+        />
+        <Box
+          position={[0, 1, 0]}
+          color={boxColors[1]}
+          onHover={() => setHover(true)}
+          onHoverEnd={() => setHover(false)}
+        />
+        <Box
+          position={[2, 1, 0]}
+          color={boxColors[2]}
+          onHover={() => setHover(true)}
+          onHoverEnd={() => setHover(false)}
+        />
+        <Box
+          position={[-2, -1, 0]}
+          color={boxColors[3]}
+          onHover={() => setHover(true)}
+          onHoverEnd={() => setHover(false)}
+        />
+        <Box
+          position={[0, -1, 0]}
+          color={boxColors[4]}
+          onHover={() => setHover(true)}
+          onHoverEnd={() => setHover(false)}
+        />
+        <Box
+          position={[2, -1, 0]}
+          color={boxColors[5]}
+          onHover={() => setHover(true)}
+          onHoverEnd={() => setHover(false)}
+        />
       </Canvas>
     </div>
   );

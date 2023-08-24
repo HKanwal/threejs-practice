@@ -5,6 +5,8 @@ import { Mesh } from "three";
 interface BoxProps {
   position?: [number, number, number];
   color?: string;
+  onHover?: () => void;
+  onHoverEnd?: () => void;
 }
 
 function Box(props: BoxProps) {
@@ -16,12 +18,22 @@ function Box(props: BoxProps) {
     meshRef.current?.rotateZ(hover ? delta * 2 : delta / 2);
   });
 
+  const handleHover = () => {
+    setHover(true);
+    props.onHover?.();
+  };
+
+  const handleHoverEnd = () => {
+    setHover(false);
+    props.onHoverEnd?.();
+  };
+
   return (
     <mesh
       ref={meshRef}
       position={props.position}
-      onPointerOver={() => setHover(true)}
-      onPointerOut={() => setHover(false)}
+      onPointerOver={handleHover}
+      onPointerOut={handleHoverEnd}
       scale={hover ? 1.2 : 1}
     >
       <boxGeometry args={[1, 1, 1]} />
