@@ -9,8 +9,12 @@ function App() {
         <ambientLight intensity={0.1} />
         <directionalLight color="white" position={[0, 0, 5]} />
 
-        <Box position={[-3, 0, 0]} />
-        <Box position={[3, 0, 0]} />
+        <Box position={[-2, 1, 0]} />
+        <Box position={[0, 1, 0]} />
+        <Box position={[2, 1, 0]} />
+        <Box position={[-2, -1, 0]} />
+        <Box position={[0, -1, 0]} />
+        <Box position={[2, -1, 0]} />
       </Canvas>
     </div>
   );
