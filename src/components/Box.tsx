@@ -7,6 +7,7 @@ interface BoxProps {
   color?: string;
   onHover?: () => void;
   onHoverEnd?: () => void;
+  turn: "player" | "computer";
 }
 
 function Box(props: BoxProps) {
@@ -14,8 +15,12 @@ function Box(props: BoxProps) {
   const [hover, setHover] = useState(false);
 
   useFrame((state, delta) => {
-    meshRef.current?.rotateX(hover ? delta * 2 : delta / 2);
-    meshRef.current?.rotateZ(hover ? delta * 2 : delta / 2);
+    meshRef.current?.rotateX(
+      hover && props.turn === "player" ? delta * 2 : delta / 2
+    );
+    meshRef.current?.rotateZ(
+      hover && props.turn === "player" ? delta * 2 : delta / 2
+    );
   });
 
   const handleHover = () => {
@@ -34,7 +39,7 @@ function Box(props: BoxProps) {
       position={props.position}
       onPointerOver={handleHover}
       onPointerOut={handleHoverEnd}
-      scale={hover ? 1.2 : 1}
+      scale={hover && props.turn === "player" ? 1.2 : 1}
     >
       <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial color={props.color} />

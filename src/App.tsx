@@ -60,7 +60,7 @@ function App() {
   return (
     <div
       id="canvas-container"
-      style={{ cursor: hover ? "pointer" : "default" }}
+      style={{ cursor: hover && turn === "player" ? "pointer" : "auto" }}
     >
       <Canvas>
         <ambientLight intensity={0.1} />
@@ -71,36 +71,42 @@ function App() {
           color={boxColors[0]}
           onHover={() => setHover(true)}
           onHoverEnd={() => setHover(false)}
+          turn={turn}
         />
         <Box
           position={[0, 1, 0]}
           color={boxColors[1]}
           onHover={() => setHover(true)}
           onHoverEnd={() => setHover(false)}
+          turn={turn}
         />
         <Box
           position={[2, 1, 0]}
           color={boxColors[2]}
           onHover={() => setHover(true)}
           onHoverEnd={() => setHover(false)}
+          turn={turn}
         />
         <Box
           position={[-2, -1, 0]}
           color={boxColors[3]}
           onHover={() => setHover(true)}
           onHoverEnd={() => setHover(false)}
+          turn={turn}
         />
         <Box
           position={[0, -1, 0]}
           color={boxColors[4]}
           onHover={() => setHover(true)}
           onHoverEnd={() => setHover(false)}
+          turn={turn}
         />
         <Box
           position={[2, -1, 0]}
           color={boxColors[5]}
           onHover={() => setHover(true)}
           onHoverEnd={() => setHover(false)}
+          turn={turn}
         />
       </Canvas>
     </div>
