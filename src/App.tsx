@@ -50,7 +50,7 @@ function App() {
         return;
       }
 
-      const newBoxColors = boxColors.map((color, ci) => {
+      const newBoxColors = boxColors.map((_color, ci) => {
         return ci === seq[i] ? "blue" : "white";
       }) as BoxColors;
 
@@ -81,7 +81,7 @@ function App() {
 
     const correct = i === sequence?.[playerIndex];
 
-    const newBoxColors = boxColors.map((color, ci) => {
+    const newBoxColors = boxColors.map((_color, ci) => {
       return ci === i ? (correct ? "green" : "red") : "white";
     }) as BoxColors;
     setBoxColors(newBoxColors);

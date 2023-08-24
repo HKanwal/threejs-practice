@@ -15,7 +15,7 @@ function Box(props: BoxProps) {
   const meshRef = useRef<Mesh>(null);
   const [hover, setHover] = useState(false);
 
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     meshRef.current?.rotateX(
       hover && props.turn === "player" ? delta * 2 : delta / 2
     );
