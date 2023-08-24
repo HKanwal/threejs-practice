@@ -35,7 +35,7 @@ function App() {
   const [sequence, setSequence] = useState<null | number[]>(null);
   const [playerIndex, setPlayerIndex] = useState(0);
 
-  useEffect(() => {
+  const playSequence = () => {
     const seq = generateSequence(5);
     let i = 0;
 
@@ -61,6 +61,10 @@ function App() {
     }
 
     setTimeout(colorNextBox, 1000);
+  };
+
+  useEffect(() => {
+    playSequence();
   }, []);
 
   const handleBoxClick = (i: number) => {
@@ -79,10 +83,14 @@ function App() {
     }) as BoxColors;
     setBoxColors(newBoxColors);
 
-    setPlayerIndex(playerIndex + 1);
-
     if (!correct) {
       setTurn("game over");
+    } else if (playerIndex === sequence.length - 1) {
+      setTurn("computer");
+      setSequence(null);
+      setTimeout(playSequence, 1100);
+    } else {
+      setPlayerIndex(playerIndex + 1);
     }
 
     setTimeout(() => {
