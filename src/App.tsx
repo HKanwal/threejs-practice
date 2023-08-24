@@ -57,6 +57,22 @@ function App() {
     setTimeout(colorNextBox, 1000);
   }, []);
 
+  const handleBoxClick = (i: number) => {
+    if (turn !== "player" || boxColors.includes("green")) {
+      return;
+    }
+
+    const newBoxColors = boxColors.map((color, ci) => {
+      return ci === i ? "green" : "white";
+    }) as BoxColors;
+
+    setBoxColors(newBoxColors);
+
+    setTimeout(() => {
+      setBoxColors(["white", "white", "white", "white", "white", "white"]);
+    }, 700);
+  };
+
   return (
     <div
       id="canvas-container"
@@ -72,6 +88,7 @@ function App() {
           onHover={() => setHover(true)}
           onHoverEnd={() => setHover(false)}
           turn={turn}
+          onClick={() => handleBoxClick(0)}
         />
         <Box
           position={[0, 1, 0]}
@@ -79,6 +96,7 @@ function App() {
           onHover={() => setHover(true)}
           onHoverEnd={() => setHover(false)}
           turn={turn}
+          onClick={() => handleBoxClick(1)}
         />
         <Box
           position={[2, 1, 0]}
@@ -86,6 +104,7 @@ function App() {
           onHover={() => setHover(true)}
           onHoverEnd={() => setHover(false)}
           turn={turn}
+          onClick={() => handleBoxClick(2)}
         />
         <Box
           position={[-2, -1, 0]}
@@ -93,6 +112,7 @@ function App() {
           onHover={() => setHover(true)}
           onHoverEnd={() => setHover(false)}
           turn={turn}
+          onClick={() => handleBoxClick(3)}
         />
         <Box
           position={[0, -1, 0]}
@@ -100,6 +120,7 @@ function App() {
           onHover={() => setHover(true)}
           onHoverEnd={() => setHover(false)}
           turn={turn}
+          onClick={() => handleBoxClick(4)}
         />
         <Box
           position={[2, -1, 0]}
@@ -107,6 +128,7 @@ function App() {
           onHover={() => setHover(true)}
           onHoverEnd={() => setHover(false)}
           turn={turn}
+          onClick={() => handleBoxClick(5)}
         />
       </Canvas>
     </div>

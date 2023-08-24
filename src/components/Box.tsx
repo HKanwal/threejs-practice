@@ -8,6 +8,7 @@ interface BoxProps {
   onHover?: () => void;
   onHoverEnd?: () => void;
   turn: "player" | "computer";
+  onClick?: () => void;
 }
 
 function Box(props: BoxProps) {
@@ -40,6 +41,7 @@ function Box(props: BoxProps) {
       onPointerOver={handleHover}
       onPointerOut={handleHoverEnd}
       scale={hover && props.turn === "player" ? 1.2 : 1}
+      onClick={props.onClick}
     >
       <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial color={props.color} />
