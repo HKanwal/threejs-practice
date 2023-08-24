@@ -48,7 +48,7 @@ function App() {
       }
 
       const newBoxColors = boxColors.map((color, ci) => {
-        return ci === seq[i] ? "green" : "white";
+        return ci === seq[i] ? "blue" : "white";
       }) as BoxColors;
 
       setBoxColors(newBoxColors);
