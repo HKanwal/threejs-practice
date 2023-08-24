@@ -28,7 +28,9 @@ function App() {
     "white",
     "white",
   ]);
-  const [turn, setTurn] = useState<"player" | "computer">("computer");
+  const [turn, setTurn] = useState<"player" | "computer" | "game over">(
+    "computer"
+  );
   const [hover, setHover] = useState(false);
   const [sequence, setSequence] = useState<null | number[]>(null);
   const [playerIndex, setPlayerIndex] = useState(0);
@@ -79,11 +81,12 @@ function App() {
 
     setPlayerIndex(playerIndex + 1);
 
+    if (!correct) {
+      setTurn("game over");
+    }
+
     setTimeout(() => {
-      if (!correct) {
-        setTurn("computer");
-        alert("Game Over! Refresh to play again.");
-      } else {
+      if (correct) {
         setBoxColors(["white", "white", "white", "white", "white", "white"]);
       }
     }, 700);
@@ -94,6 +97,13 @@ function App() {
       id="canvas-container"
       style={{ cursor: hover && turn === "player" ? "pointer" : "auto" }}
     >
+      <h2 id="turn">
+        {turn === "player"
+          ? "Player Turn"
+          : turn === "computer"
+          ? "Computer Turn"
+          : "Game Over! Refresh to play again."}
+      </h2>
       <Canvas>
         <ambientLight intensity={0.1} />
         <directionalLight color="white" position={[0, 0, 5]} />
@@ -103,7 +113,7 @@ function App() {
           color={boxColors[0]}
           onHover={() => setHover(true)}
           onHoverEnd={() => setHover(false)}
-          turn={turn}
+          turn={turn === "player" ? "player" : "computer"}
           onClick={() => handleBoxClick(0)}
         />
         <Box
@@ -111,7 +121,7 @@ function App() {
           color={boxColors[1]}
           onHover={() => setHover(true)}
           onHoverEnd={() => setHover(false)}
-          turn={turn}
+          turn={turn === "player" ? "player" : "computer"}
           onClick={() => handleBoxClick(1)}
         />
         <Box
@@ -119,7 +129,7 @@ function App() {
           color={boxColors[2]}
           onHover={() => setHover(true)}
           onHoverEnd={() => setHover(false)}
-          turn={turn}
+          turn={turn === "player" ? "player" : "computer"}
           onClick={() => handleBoxClick(2)}
         />
         <Box
@@ -127,7 +137,7 @@ function App() {
           color={boxColors[3]}
           onHover={() => setHover(true)}
           onHoverEnd={() => setHover(false)}
-          turn={turn}
+          turn={turn === "player" ? "player" : "computer"}
           onClick={() => handleBoxClick(3)}
         />
         <Box
@@ -135,7 +145,7 @@ function App() {
           color={boxColors[4]}
           onHover={() => setHover(true)}
           onHoverEnd={() => setHover(false)}
-          turn={turn}
+          turn={turn === "player" ? "player" : "computer"}
           onClick={() => handleBoxClick(4)}
         />
         <Box
@@ -143,7 +153,7 @@ function App() {
           color={boxColors[5]}
           onHover={() => setHover(true)}
           onHoverEnd={() => setHover(false)}
-          turn={turn}
+          turn={turn === "player" ? "player" : "computer"}
           onClick={() => handleBoxClick(5)}
         />
       </Canvas>

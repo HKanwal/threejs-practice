@@ -1,3 +1,11 @@
 #canvas-container {
   height: 100%;
 }
+
+#turn {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: Roboto;
+}
