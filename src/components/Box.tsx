@@ -1,14 +1,13 @@
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { BufferGeometry, Material, Mesh, NormalBufferAttributes } from "three";
+import { Mesh } from "three";
 
-type MeshElement = Mesh<
-  BufferGeometry<NormalBufferAttributes>,
-  Material | Material[]
->;
+interface BoxProps {
+  position?: [number, number, number];
+}
 
-function Box() {
-  const meshRef = useRef<MeshElement>(null);
+function Box(props: BoxProps) {
+  const meshRef = useRef<Mesh>(null);
 
   useFrame((state, delta) => {
     meshRef.current?.rotateX(delta);
@@ -16,9 +15,9 @@ function Box() {
   });
 
   return (
-    <mesh ref={meshRef}>
-      <boxGeometry args={[2, 2, 2]} />
-      <meshStandardMaterial />
+    <mesh ref={meshRef} position={props.position}>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color={"white"} />
     </mesh>
   );
 }

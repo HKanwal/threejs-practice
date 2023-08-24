@@ -7,9 +7,10 @@ function App() {
     <div id="canvas-container">
       <Canvas>
         <ambientLight intensity={0.1} />
-        <directionalLight color="grey" position={[0, 0, 5]} />
+        <directionalLight color="white" position={[0, 0, 5]} />
 
-        <Box />
+        <Box position={[-3, 0, 0]} />
+        <Box position={[3, 0, 0]} />
       </Canvas>
     </div>
   );
