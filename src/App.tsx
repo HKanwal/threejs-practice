@@ -62,7 +62,11 @@ function App() {
   }, []);
 
   const handleBoxClick = (i: number) => {
-    if (turn !== "player" || boxColors.includes("green")) {
+    if (
+      turn !== "player" ||
+      boxColors.includes("green") ||
+      boxColors.includes("red")
+    ) {
       return;
     }
 
@@ -71,12 +75,17 @@ function App() {
     const newBoxColors = boxColors.map((color, ci) => {
       return ci === i ? (correct ? "green" : "red") : "white";
     }) as BoxColors;
-
     setBoxColors(newBoxColors);
+
     setPlayerIndex(playerIndex + 1);
 
     setTimeout(() => {
-      setBoxColors(["white", "white", "white", "white", "white", "white"]);
+      if (!correct) {
+        setTurn("computer");
+        alert("Game Over! Refresh to play again.");
+      } else {
+        setBoxColors(["white", "white", "white", "white", "white", "white"]);
+      }
     }, 700);
   };
 
