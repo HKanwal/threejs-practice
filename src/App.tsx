@@ -34,9 +34,12 @@ function App() {
   const [hover, setHover] = useState(false);
   const [sequence, setSequence] = useState<null | number[]>(null);
   const [playerIndex, setPlayerIndex] = useState(0);
+  const [level, setLevel] = useState(0);
 
   const playSequence = () => {
-    const seq = generateSequence(5);
+    const newLevel = level + 1;
+    setLevel(newLevel);
+    const seq = generateSequence(newLevel);
     let i = 0;
 
     function colorNextBox() {
@@ -105,13 +108,16 @@ function App() {
       id="canvas-container"
       style={{ cursor: hover && turn === "player" ? "pointer" : "auto" }}
     >
-      <h2 id="turn">
-        {turn === "player"
-          ? "Player Turn"
-          : turn === "computer"
-          ? "Computer Turn"
-          : "Game Over! Refresh to play again."}
-      </h2>
+      <header>
+        <h2 id="turn">
+          {turn === "player"
+            ? "Player Turn"
+            : turn === "computer"
+            ? "Computer Turn"
+            : "Game Over! Refresh to play again."}
+        </h2>
+        <h3 id="level">{`Level: ${level}`}</h3>
+      </header>
       <Canvas>
         <ambientLight intensity={0.1} />
         <directionalLight color="white" position={[0, 0, 5]} />
