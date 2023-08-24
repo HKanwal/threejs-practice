@@ -30,6 +30,8 @@ function App() {
   ]);
   const [turn, setTurn] = useState<"player" | "computer">("computer");
   const [hover, setHover] = useState(false);
+  const [sequence, setSequence] = useState<null | number[]>(null);
+  const [playerIndex, setPlayerIndex] = useState(0);
 
   useEffect(() => {
     const seq = generateSequence(5);
@@ -38,6 +40,8 @@ function App() {
     function colorNextBox() {
       if (i === seq.length) {
         setTurn("player");
+        setSequence(seq);
+        setPlayerIndex(0);
         return;
       }
 
@@ -62,11 +66,14 @@ function App() {
       return;
     }
 
+    const correct = i === sequence?.[playerIndex];
+
     const newBoxColors = boxColors.map((color, ci) => {
-      return ci === i ? "green" : "white";
+      return ci === i ? (correct ? "green" : "red") : "white";
     }) as BoxColors;
 
     setBoxColors(newBoxColors);
+    setPlayerIndex(playerIndex + 1);
 
     setTimeout(() => {
       setBoxColors(["white", "white", "white", "white", "white", "white"]);
